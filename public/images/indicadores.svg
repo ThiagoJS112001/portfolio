@@ -1,0 +1,51 @@
+<svg width="400" height="250" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="250" fill="#f8f9fa"/>
+  
+  <!-- Main dashboard container -->
+  <rect x="50" y="50" width="300" height="150" fill="#fff" stroke="#e1e8ed" stroke-width="2" rx="8"/>
+  
+  <!-- Header bar -->
+  <rect x="50" y="50" width="300" height="30" fill="#1e88e5" rx="8 8 0 0"/>
+  <text x="200" y="70" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#fff">PAINEL DE INDICADORES</text>
+  
+  <!-- KPI Cards -->
+  <g transform="translate(70, 100)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="70" height="50" fill="#4caf50" rx="4"/>
+    <text x="35" y="20" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#fff">95%</text>
+    <text x="35" y="35" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="8" fill="#fff">QUALIDADE</text>
+    
+    <!-- Card 2 -->
+    <rect x="80" y="0" width="70" height="50" fill="#ff9800" rx="4"/>
+    <text x="115" y="20" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#fff">87%</text>
+    <text x="115" y="35" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="8" fill="#fff">EFICIÊNCIA</text>
+    
+    <!-- Card 3 -->
+    <rect x="160" y="0" width="70" height="50" fill="#2196f3" rx="4"/>
+    <text x="195" y="20" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" fill="#fff">124</text>
+    <text x="195" y="35" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="8" fill="#fff">PRODUÇÃO</text>
+  </g>
+  
+  <!-- Chart area -->
+  <g transform="translate(70, 160)">
+    <!-- Chart background -->
+    <rect x="0" y="0" width="260" height="30" fill="#f5f5f5" rx="2"/>
+    
+    <!-- Chart bars -->
+    <rect x="10" y="5" width="40" height="20" fill="#4caf50" rx="1"/>
+    <rect x="60" y="8" width="35" height="17" fill="#2196f3" rx="1"/>
+    <rect x="105" y="3" width="45" height="24" fill="#ff9800" rx="1"/>
+    <rect x="160" y="6" width="38" height="21" fill="#9c27b0" rx="1"/>
+    <rect x="208" y="4" width="42" height="23" fill="#f44336" rx="1"/>
+  </g>
+  
+  <!-- Trend arrows -->
+  <g transform="translate(320, 110)">
+    <!-- Up arrow (positive trend) -->
+    <path d="M0,15 L10,5 L20,15 M10,5 L10,25" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+  </g>
+  
+  <!-- Bottom text -->
+  <text x="200" y="230" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#2c3e50">INDICADORES DE PERFORMANCE</text>
+</svg>

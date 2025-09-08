@@ -1,0 +1,79 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Header -->
+  <rect width="800" height="80" fill="#2563eb"/>
+  <text x="40" y="35" fill="white" font-family="Arial" font-size="20" font-weight="bold">KAIZEN - Criação de Ideia</text>
+  <text x="40" y="60" fill="#bfdbfe" font-family="Arial" font-size="14">Formulário: MLH-20250905/085</text>
+  
+  <!-- Navigation -->
+  <rect x="0" y="80" width="200" height="520" fill="#1e293b"/>
+  <rect x="20" y="160" width="160" height="40" rx="8" fill="#334155"/>
+  <text x="30" y="185" fill="white" font-family="Arial" font-size="14">💡 Criar Kaizen</text>
+  
+  <!-- Main Form -->
+  <rect x="220" y="100" width="560" height="480" rx="12" fill="white" stroke="#e2e8f0"/>
+  
+  <!-- Form Header -->
+  <rect x="240" y="120" width="520" height="60" fill="#f8fafc" rx="8"/>
+  <text x="260" y="145" fill="#1e293b" font-family="Arial" font-size="18" font-weight="bold">📋 Ideia Kaizen</text>
+  <text x="260" y="165" fill="#64748b" font-family="Arial" font-size="14">Preencha os dados da sua ideia de melhoria</text>
+  
+  <!-- Form Fields -->
+  <!-- Row 1 -->
+  <text x="260" y="210" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Número do Kaizen *</text>
+  <rect x="260" y="215" width="200" height="35" fill="#f9fafb" stroke="#d1d5db" rx="6"/>
+  <text x="270" y="237" fill="#6b7280" font-family="Arial" font-size="13">MLH-20250905/085</text>
+  
+  <text x="480" y="210" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Tipo *</text>
+  <rect x="480" y="215" width="200" height="35" fill="white" stroke="#d1d5db" rx="6"/>
+  <text x="490" y="237" fill="#374151" font-family="Arial" font-size="13">Meio Ambiente ▼</text>
+  
+  <!-- Row 2 -->
+  <text x="260" y="280" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Ideia Kaizen *</text>
+  <rect x="260" y="285" width="420" height="35" fill="white" stroke="#d1d5db" rx="6"/>
+  <text x="270" y="307" fill="#374151" font-family="Arial" font-size="13">Redução do consumo de água na linha de produção</text>
+  
+  <!-- Row 3 -->
+  <text x="260" y="350" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Área Ideia Kaizen *</text>
+  <rect x="260" y="355" width="200" height="35" fill="white" stroke="#d1d5db" rx="6"/>
+  <text x="270" y="377" fill="#374151" font-family="Arial" font-size="13">Administrativo ▼</text>
+  
+  <text x="480" y="350" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Setor Ideia Kaizen *</text>
+  <rect x="480" y="355" width="200" height="35" fill="white" stroke="#d1d5db" rx="6"/>
+  <text x="490" y="377" fill="#374151" font-family="Arial" font-size="13">Administrativoasd ▼</text>
+  
+  <!-- Row 4 -->
+  <text x="260" y="420" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Líder do Kaizen *</text>
+  <rect x="260" y="425" width="200" height="35" fill="white" stroke="#d1d5db" rx="6"/>
+  <text x="270" y="447" fill="#374151" font-family="Arial" font-size="13">BEATRIZ RIZZO PASCHOA...</text>
+  
+  <text x="480" y="420" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Originador *</text>
+  <rect x="480" y="425" width="200" height="35" fill="#f9fafb" stroke="#d1d5db" rx="6"/>
+  <text x="490" y="447" fill="#6b7280" font-family="Arial" font-size="13">BEATRIZ RIZZO PASCHOA...</text>
+  
+  <!-- Textarea -->
+  <text x="260" y="490" fill="#374151" font-family="Arial" font-size="14" font-weight="bold">Situação Atual *</text>
+  <rect x="260" y="495" width="420" height="60" fill="white" stroke="#d1d5db" rx="6"/>
+  <text x="270" y="515" fill="#374151" font-family="Arial" font-size="12">Atualmente o processo de limpeza utiliza grande quantidade</text>
+  <text x="270" y="530" fill="#374151" font-family="Arial" font-size="12">de água, gerando desperdício e custos elevados...</text>
+  
+  <!-- Action Buttons -->
+  <rect x="560" y="540" width="80" height="35" fill="#dc2626" rx="6"/>
+  <text x="575" y="562" fill="white" font-family="Arial" font-size="14" font-weight="bold">Cancelar</text>
+  
+  <rect x="650" y="540" width="80" height="35" fill="#2563eb" rx="6"/>
+  <text x="675" y="562" fill="white" font-family="Arial" font-size="14" font-weight="bold">Salvar</text>
+  
+  <!-- Required Field Note -->
+  <text x="260" y="575" fill="#ef4444" font-family="Arial" font-size="12">* Campos obrigatórios</text>
+  
+  <!-- Progress Indicator -->
+  <rect x="700" y="120" width="40" height="40" fill="#dbeafe" rx="20"/>
+  <text x="715" y="145" fill="#2563eb" font-family="Arial" font-size="16" font-weight="bold">1</text>
+  
+  <!-- Status indicators -->
+  <rect x="700" y="180" width="60" height="25" fill="#fef3c7" rx="12"/>
+  <text x="710" y="197" fill="#92400e" font-family="Arial" font-size="11" font-weight="bold">RASCUNHO</text>
+</svg>

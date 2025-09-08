@@ -1,0 +1,13 @@
+<svg width="400" height="250" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="400" height="250" fill="#e8e8e8"/>
+  
+  <!-- Japanese character on the left (善 - zen, meaning "good") -->
+  <text x="100" y="140" text-anchor="middle" font-family="serif" font-size="48" font-weight="400" fill="#666">善</text>
+  
+  <!-- Kaizen text in the center -->
+  <text x="200" y="140" text-anchor="middle" font-family="serif" font-size="48" font-weight="400" fill="#666">Kaizen</text>
+  
+  <!-- Japanese character on the right (改 - kai, meaning "improvement") -->
+  <text x="300" y="140" text-anchor="middle" font-family="serif" font-size="48" font-weight="400" fill="#666">改</text>
+</svg>
