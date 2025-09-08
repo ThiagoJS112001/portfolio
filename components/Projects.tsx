@@ -15,9 +15,9 @@ export default function Projects() {
       technologies: ['Oracle APEX', 'PL/SQL', 'JavaScript'],
       link: '#',
       gallery: [
-        '/kaizen-screenshots/kaizen-dashboard.svg',
-        '/kaizen-screenshots/kaizen-form.svg', 
-        '/kaizen-screenshots/kaizen-list.svg'
+        '/kaizen-screenshots/kaizen-dashboard-real.png',
+        '/kaizen-screenshots/kaizen-form-real.png', 
+        '/kaizen-screenshots/kaizen-list-real.png'
       ],
       detailedDescription: 'Sistema completo de gestão Kaizen desenvolvido em Oracle APEX. Inclui módulos para criação de ideias, premiação, indicadores de performance e parametrização. Interface moderna e intuitiva com dashboards interativos e relatórios detalhados.'
     },
