@@ -105,7 +105,7 @@ export default function Contact() {
                   {info.href ? (
                     <a
                       href={info.href}
-                      className="text-gray-300 hover:text-accent transition-colors duration-300"
+                      className="text-gray-300 hover:text-accent transition-colors duration-150"
                     >
                       {info.value}
                     </a>
@@ -137,11 +137,17 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   initial={{ opacity: 0, x: 20 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    transition: { duration: 0.15, ease: "easeOut" }
+                  }}
+                  whileTap={{ 
+                    scale: 0.98,
+                    transition: { duration: 0.1 }
+                  }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className={`flex items-center space-x-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-sm hover:shadow-lg hover:bg-white/20 transition-all duration-300 text-white ${social.color}`}
+                  className={`flex items-center space-x-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-sm hover:shadow-lg hover:bg-white/20 transition-all duration-150 text-white ${social.color}`}
                 >
                   <div className="flex-shrink-0">
                     {social.icon}

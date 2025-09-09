@@ -76,21 +76,21 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 group"
             >
               {/* Project Image */}
               <div className="relative h-56 sm:h-64 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center overflow-hidden p-4">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-contain transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
               </div>
 
               {/* Project Content */}
               <div className="p-6">
-                <h3 className="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors duration-300">
+                <h3 className="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors duration-200">
                   {project.title}
                 </h3>
                 

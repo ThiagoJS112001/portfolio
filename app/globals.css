@@ -14,7 +14,7 @@ body {
 
 @layer components {
   .btn {
-    @apply px-6 py-3 font-medium rounded-lg transition-all duration-300 cursor-pointer inline-block text-center;
+    @apply px-6 py-3 font-medium rounded-lg transition-all duration-200 cursor-pointer inline-block text-center;
   }
   
   .btn-primary {
@@ -35,5 +35,14 @@ body {
   
   .gradient-text {
     @apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+  }
+
+  /* Otimizações para hover mais responsivo */
+  .hover-fast {
+    @apply transition-all duration-150 ease-out;
+  }
+  
+  .hover-scale {
+    @apply hover:scale-[1.02] active:scale-[0.98];
   }
 }
