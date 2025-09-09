@@ -76,7 +76,7 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 group"
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 group flex flex-col h-full"
             >
               {/* Project Image */}
               <div className="relative h-56 sm:h-64 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center overflow-hidden p-4">
@@ -89,12 +89,12 @@ export default function Projects() {
               </div>
 
               {/* Project Content */}
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors duration-200">
                   {project.title}
                 </h3>
                 
-                <p className="text-text-secondary mb-4 leading-relaxed">
+                <p className="text-text-secondary mb-4 leading-relaxed flex-grow">
                   {project.description}
                 </p>
 
@@ -115,7 +115,7 @@ export default function Projects() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={() => openProjectModal(project)}
-                  className="btn btn-primary btn-small w-full text-center"
+                  className="btn btn-primary btn-small w-full text-center mt-auto"
                   disabled={!project.gallery || project.gallery.length === 0}
                 >
                   {project.gallery && project.gallery.length > 0 ? 'Ver Projeto' : 'Em Breve'}

@@ -15,6 +15,7 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [isDragging, setIsDragging] = useState(false)
 
   // Keyboard navigation
   useEffect(() => {
@@ -57,6 +58,26 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
     setCurrentImageIndex(index)
   }
 
+  // Handle swipe gestures
+  const handleDragStart = () => {
+    setIsDragging(true)
+  }
+
+  const handleDragEnd = (event: any, info: any) => {
+    setIsDragging(false)
+    const threshold = 30 // reduced threshold for better mobile sensitivity
+    
+    if (Math.abs(info.offset.x) > threshold) {
+      if (info.offset.x > 0) {
+        // Swiped right, go to previous image
+        prevImage()
+      } else {
+        // Swiped left, go to next image
+        nextImage()
+      }
+    }
+  }
+
   if (!isOpen) return null
 
   return (
@@ -90,7 +111,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
           </div>
 
           {/* Carousel */}
-          <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gray-100">
+          <div className="relative h-96 md:h-[500px] lg:h-[600px] bg-gray-100 overflow-hidden">
             <AnimatePresence mode="wait">
               <motion.img
                 key={currentImageIndex}
@@ -98,9 +119,22 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ duration: 0.3 }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragStart={handleDragStart}
+                onDragEnd={handleDragEnd}
+                whileDrag={{ 
+                  cursor: "grabbing",
+                  scale: 0.95
+                }}
+                style={{
+                  filter: isDragging ? 'brightness(0.8)' : 'brightness(1)',
+                  transition: 'filter 0.2s ease'
+                }}
+                className="w-full h-full object-contain cursor-grab select-none touch-pan-x"
                 src={project.images[currentImageIndex]}
                 alt={`${project.title} - Imagem ${currentImageIndex + 1}`}
-                className="w-full h-full object-contain"
               />
             </AnimatePresence>
 
@@ -109,7 +143,7 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               <>
                 <button
                   onClick={prevImage}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+                  className="absolute left-4 top-1/2 transform -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group z-10"
                   title="Imagem anterior (← ou seta esquerda)"
                 >
                   <svg className="w-6 h-6 text-gray-700 group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,13 +152,53 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
                 </button>
                 <button
                   onClick={nextImage}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 p-3 bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group z-10"
                   title="Próxima imagem (→ ou seta direita)"
                 >
                   <svg className="w-6 h-6 text-gray-700 group-hover:text-accent transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
                   </svg>
                 </button>
+                
+                {/* Swipe indicators for mobile */}
+                <div className="absolute left-8 top-1/2 transform -translate-y-1/2 lg:hidden pointer-events-none">
+                  <motion.div
+                    animate={{ 
+                      x: [-5, 5, -5],
+                      opacity: [0.3, 0.7, 0.3]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity,
+                      ease: "easeInOut"
+                    }}
+                    className="text-white/60"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </motion.div>
+                </div>
+                
+                <div className="absolute right-8 top-1/2 transform -translate-y-1/2 lg:hidden pointer-events-none">
+                  <motion.div
+                    animate={{ 
+                      x: [5, -5, 5],
+                      opacity: [0.3, 0.7, 0.3]
+                    }}
+                    transition={{ 
+                      duration: 2, 
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: 1
+                    }}
+                    className="text-white/60"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                    </svg>
+                  </motion.div>
+                </div>
               </>
             )}
 
@@ -133,9 +207,10 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
               {currentImageIndex + 1} / {project.images.length}
             </div>
 
-            {/* Keyboard hint */}
-            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-black/60 text-white text-xs rounded-full hidden lg:block">
-              Use ← → ou clique nas setas
+            {/* Navigation hint */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-black/60 text-white text-xs rounded-full">
+              <span className="hidden lg:inline">Use ← → ou clique nas setas</span>
+              <span className="lg:hidden">Arraste para navegar</span>
             </div>
           </div>
 
