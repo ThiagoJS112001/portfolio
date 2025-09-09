@@ -26,7 +26,7 @@ export default function Hero() {
   return (
     <section id="home" className="min-h-screen flex items-center justify-center bg-gradient-to-br from-bg-secondary to-white relative overflow-hidden">
       {/* Background decoration */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent/10 rounded-full blur-3xl"></div>
       </div>

@@ -9,9 +9,9 @@ import Footer from '../components/Footer'
 
 export default function Home() {
   return (
-    <>
+    <div className="overflow-x-hidden min-h-screen">
       <Header />
-      <main>
+      <main className="overflow-x-hidden">
         <Hero />
         <About />
         <Experience />
@@ -20,6 +20,6 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
-    </>
+    </div>
   )
 }

@@ -43,6 +43,16 @@ export default function ProjectModal({ isOpen, onClose, project }: ProjectModalP
   useEffect(() => {
     if (isOpen) {
       setCurrentImageIndex(0)
+      // Previne scroll do body quando modal está aberto
+      document.body.style.overflow = 'hidden'
+    } else {
+      // Restaura scroll do body quando modal fecha
+      document.body.style.overflow = 'unset'
+    }
+
+    // Cleanup quando componente é desmontado
+    return () => {
+      document.body.style.overflow = 'unset'
     }
   }, [isOpen])
 

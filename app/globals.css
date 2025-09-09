@@ -6,10 +6,27 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 body {
   font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+  min-width: 320px; /* Largura mínima para evitar problemas */
+}
+
+/* Previne overflow horizontal em todos os elementos */
+*, *::before, *::after {
+  max-width: 100%;
+}
+
+/* Container principal para prevenir overflow */
+#__next {
+  overflow-x: hidden;
+  width: 100%;
 }
 
 @layer components {
