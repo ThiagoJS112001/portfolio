@@ -42,13 +42,10 @@ export default function Projects() {
   ]
 
   const openProjectModal = (project: any) => {
-    if (project.gallery && project.gallery.length > 0) {
-      setSelectedProject({
-        title: project.title,
-        images: project.gallery,
-        description: project.detailedDescription
-      })
-    }
+    setSelectedProject({
+      title: project.title,
+      description: project.detailedDescription
+    })
   }
 
   const closeModal = () => {
@@ -116,9 +113,8 @@ export default function Projects() {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => openProjectModal(project)}
                   className="btn btn-primary btn-small w-full text-center mt-auto"
-                  disabled={!project.gallery || project.gallery.length === 0}
                 >
-                  {project.gallery && project.gallery.length > 0 ? 'Ver Projeto' : 'Em Breve'}
+                  Ver Projeto
                 </motion.button>
               </div>
             </motion.div>
