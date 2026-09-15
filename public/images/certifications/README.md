@@ -1,25 +1,40 @@
 # 📁 Pasta de Certificados
 
-Coloque as imagens dos seus certificados nesta pasta usando **exatamente** os nomes abaixo:
+Imagens e PDFs dos certificados usados na seção **Certificações & Cursos** do portfólio.
 
-| Arquivo | Certificado |
-|---------|-------------|
-| `oracle-oci-foundations.png` | Oracle Cloud Infrastructure 2025 Certified Foundations Associate |
-| `efset-english-c1.png` | EF SET English Certificate 62/100 (C1 Advanced) |
-| `oracle-apex-udemy-2023.png` | Oracle APEX do básico ao avançado (Udemy, nov/2023) |
-| `fisk-2019.png` | Fisk Centro de Ensino |
-| `oracle-apex-fundamentals-2022.png` | The Complete Oracle APEX Fundamentals Course (2022) |
+## 📂 Arquivos atuais
 
-## 📌 Recomendações
+| Arquivo | Certificado | Tipo |
+|---------|-------------|------|
+| `Oracle Foundations Associate.jpg` | Oracle Cloud Infrastructure 2025 Certified Foundations Associate | Imagem |
+| `Oracle APEX do Básico ao Avançado.jpg` | Oracle APEX do básico ao avançado (Udemy) | Imagem |
+| `The Complete Oracle APEX Fundamentals Course (2022).jpg` | The Complete Oracle APEX Fundamentals Course (Udemy) | Imagem |
+| `79f7c0a17e78fc91e96e33d50da8fca9.jpg` | Fisk Centro de Ensino | Imagem |
+| `401fe7194d26b3fc72a1013cfeeb82f2.jpg` | Fisk Centro de Ensino - Complemento | Imagem |
+| `efset-english-c1.pdf` ⚠️ | EF SET English Certificate 62/100 (C1 Advanced) | PDF |
 
-- **Formato preferido:** `.png` ou `.jpg`
-- **Tamanho recomendado:** largura entre 1200–1600 px
+> ⚠️ **EF SET:** o arquivo `efset-english-c1.pdf` ainda não foi adicionado. Coloque o PDF do EF SET nesta pasta com exatamente esse nome.
+
+## 🔀 Sobre os 2 arquivos "hash" do Fisk
+
+Ambos os arquivos com nome hash (`401fe...` e `79f7c...`) são certificados do Fisk. Eles aparecem no portfólio como:
+
+1. **Fisk Centro de Ensino** → `79f7c0a17e78fc91e96e33d50da8fca9.jpg`
+2. **Fisk Centro de Ensino - Complemento** → `401fe7194d26b3fc72a1013cfeeb82f2.jpg`
+
+Se quiser dar títulos mais descritivos (ex: "Diploma", "Certificado de Conclusão"), basta editar o array `certifications` em `components/Certifications.tsx`.
+
+## 📌 Recomendações para novos certificados
+
+- **Formato:** `.png`, `.jpg` (imagens) ou `.pdf`
+- **Tamanho recomendado para imagens:** largura entre 1200–1600 px
 - **Orientação:** paisagem (horizontal) funciona melhor
 - **Qualidade:** use o PDF/imagem original do certificado para melhor nitidez
+- **Nome do arquivo:** prefira nomes sem espaços ou acentos (ex: `oracle-foundations.jpg`) para URLs mais limpas
 
 ## 🔧 Como adicionar uma nova certificação
 
-1. Salve a imagem nesta pasta com o nome correspondente
+1. Salve o arquivo (imagem ou PDF) nesta pasta
 2. Edite `components/Certifications.tsx`
 3. Adicione um novo objeto no array `certifications`:
 
@@ -31,8 +46,9 @@ Coloque as imagens dos seus certificados nesta pasta usando **exatamente** os no
   expiration: 'mês de ano', // opcional
   category: 'Cloud' | 'APEX' | 'Idiomas' | 'Geral',
   highlight: true, // opcional - mostra badge "Destaque"
-  imageUrl: '/images/certifications/nome-do-arquivo.png',
+  imageUrl: '/images/certifications/nome-do-arquivo.jpg',
+  fileType: 'image', // ou 'pdf' para PDFs
 }
 ```
 
-Se a imagem não for encontrada, o modal mostra uma mensagem amigável indicando o caminho esperado.
+A modal detecta automaticamente se o arquivo é PDF (pela extensão ou pelo campo `fileType`) e exibe o conteúdo correto.

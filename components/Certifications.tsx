@@ -14,6 +14,8 @@ interface Certification {
   category: Category
   highlight?: boolean
   imageUrl: string
+  fileType?: 'image' | 'pdf'
+  additionalImages?: string[]
 }
 
 const categoryStyles: Record<
@@ -54,35 +56,41 @@ const certifications: Certification[] = [
     expiration: 'mai de 2028',
     category: 'Cloud',
     highlight: true,
-    imageUrl: '/images/certifications/oracle-oci-foundations.png',
+    imageUrl: '/images/certifications/Oracle Foundations Associate.jpg',
+    fileType: 'image',
   },
   {
     title: 'EF SET English Certificate 62/100 (C1 Advanced)',
     issuer: 'EF SET',
     date: 'out de 2024',
     category: 'Idiomas',
-    imageUrl: '/images/certifications/efset-english-c1.png',
+    imageUrl: '/images/certifications/EF SET Certificate.png',
+    fileType: 'image',
   },
   {
     title: 'Oracle APEX do básico ao avançado',
     issuer: 'Udemy',
     date: 'nov de 2023',
     category: 'APEX',
-    imageUrl: '/images/certifications/oracle-apex-udemy-2023.png',
+    imageUrl: '/images/certifications/Oracle APEX do Básico ao Avançado.jpg',
+    fileType: 'image',
   },
   {
     title: 'Fisk Centro de Ensino',
     issuer: 'Fisk',
     date: 'jun de 2019',
-    category: 'Geral',
-    imageUrl: '/images/certifications/fisk-2019.png',
+    category: 'Idiomas',
+    imageUrl: '/images/certifications/Fisk (1).jpg',
+    additionalImages: ['/images/certifications/Fisk (2).jpg'],
   },
   {
     title: 'The Complete Oracle APEX Fundamentals Course (2022)',
     issuer: 'Udemy',
     date: 'ago de 2022',
     category: 'APEX',
-    imageUrl: '/images/certifications/oracle-apex-fundamentals-2022.png',
+    imageUrl:
+      '/images/certifications/The Complete Oracle APEX Fundamentals Course (2022).jpg',
+    fileType: 'image',
   },
 ]
 
@@ -227,6 +235,31 @@ export default function Certifications() {
                       />
                     </svg>
                     <span>Expira em {cert.expiration}</span>
+                  </div>
+                )}
+
+                {cert.additionalImages && cert.additionalImages.length > 0 && (
+                  <div className="mt-2 flex items-center text-xs text-primary bg-primary/5 border border-primary/20 rounded-lg px-2 py-1.5">
+                    <svg
+                      className="w-3.5 h-3.5 mr-1 flex-shrink-0"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                    </svg>
+                    <span>
+                      {cert.additionalImages.length + 1}{' '}
+                      {cert.additionalImages.length === 1
+                        ? 'imagem'
+                        : 'imagens'}{' '}
+                      no carrossel
+                    </span>
                   </div>
                 )}
               </motion.button>
