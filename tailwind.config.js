@@ -8,31 +8,43 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        // Lima elétrico — destaque forte, distinto do azul SaaS genérico
         primary: {
-          DEFAULT: '#2563eb',
-          dark: '#1d4ed8',
+          DEFAULT: '#D4F500',
+          dark: '#A8C700',
+          soft: 'rgba(212, 245, 0, 0.12)',
         },
-        secondary: '#64748b',
-        accent: '#06b6d4',
-        text: {
-          primary: '#1e293b',
-          secondary: '#64748b',
-          light: '#94a3b8',
+        // Coral quente — destaque secundário
+        accent: {
+          DEFAULT: '#FF6B35',
+          dark: '#E5552A',
         },
+        secondary: '#8A8A85',
+        // Tema dark editorial
         bg: {
-          primary: '#ffffff',
-          secondary: '#f8fafc',
-          dark: '#0f172a',
+          primary: '#0A0A0A',
+          secondary: '#141414',
+          tertiary: '#1F1F1F',
+          inverse: '#FAFAFA',
         },
-        border: '#e2e8f0',
+        text: {
+          primary: '#FAFAFA',
+          secondary: '#A0A09A',
+          light: '#6B6B6B',
+          inverse: '#0A0A0A',
+        },
+        border: '#2A2A2A',
       },
       fontFamily: {
-        inter: ['Inter', 'sans-serif'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        display: ['var(--font-instrument-serif)', 'Georgia', 'serif'],
+        mono: ['var(--font-jetbrains-mono)', 'ui-monospace', 'monospace'],
       },
       animation: {
-        'fade-in': 'fadeIn 0.5s ease-in-out',
-        'slide-up': 'slideUp 0.6s ease-out',
-        'bounce-slow': 'bounce 2s infinite',
+        'fade-in': 'fadeIn 0.6s ease-out',
+        'slide-up': 'slideUp 0.7s ease-out',
+        'marquee': 'marquee 40s linear infinite',
+        'drift': 'drift 20s ease-in-out infinite',
       },
       keyframes: {
         fadeIn: {
@@ -40,8 +52,16 @@ module.exports = {
           '100%': { opacity: '1' },
         },
         slideUp: {
-          '0%': { transform: 'translateY(30px)', opacity: '0' },
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        drift: {
+          '0%, 100%': { transform: 'translate(0, 0)' },
+          '50%': { transform: 'translate(20px, -20px)' },
         },
       },
     },

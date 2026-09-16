@@ -61,30 +61,50 @@ export default function Contact() {
   ]
 
   return (
-    <section id="contact" className="py-20 bg-bg-dark text-white">
+    <section id="contact" className="py-24 lg:py-32 bg-bg-secondary relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
+        {/* Cabeçalho editorial */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-4"
+          >
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="lg:col-span-8 lg:col-start-3 section-title text-center"
+          >
+            Vamos trabalhar{' '}
+            <span className="italic text-primary">juntos.</span>
+          </motion.h2>
+        </div>
+
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-text-secondary text-lg max-w-2xl mx-auto mb-16 text-center"
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">Vamos Trabalhar Juntos</h2>
-          <p className="text-lg text-gray-300 max-w-2xl mx-auto">
-            Interessado em colaborar ou tem algum projeto em mente?
-            Ficarei feliz em conversar sobre como posso ajudar.
-          </p>
-        </motion.div>
+          Interessado em colaborar ou tem algum projeto em mente?
+          Ficarei feliz em conversar sobre como posso ajudar.
+        </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Contact Info */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="space-y-8"
+            className="space-y-6"
           >
             {contactInfo.map((info, index) => (
               <motion.div
@@ -93,24 +113,24 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="flex items-start space-x-4"
+                className="group flex items-start gap-5"
               >
-                <div className="flex-shrink-0 w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center text-accent">
+                <div className="flex-shrink-0 w-12 h-12 card-dark flex items-center justify-center text-primary group-hover:border-primary transition-colors">
                   {info.icon}
                 </div>
                 <div>
-                  <h4 className="text-lg font-semibold text-white mb-1">
+                  <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-text-secondary mb-1">
                     {info.title}
-                  </h4>
+                  </p>
                   {info.href ? (
                     <a
                       href={info.href}
-                      className="text-gray-300 hover:text-accent transition-colors duration-150"
+                      className="text-text-primary hover:text-primary transition-colors text-lg"
                     >
                       {info.value}
                     </a>
                   ) : (
-                    <p className="text-gray-300">{info.value}</p>
+                    <p className="text-text-primary text-lg">{info.value}</p>
                   )}
                 </div>
               </motion.div>
@@ -119,46 +139,44 @@ export default function Contact() {
 
           {/* Social Links */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8"
           >
-            <h3 className="text-2xl font-bold text-white mb-6 text-center">
-              Conecte-se Comigo
-            </h3>
-            <div className="space-y-4">
-              {socialLinks.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  whileHover={{ 
-                    scale: 1.02,
-                    transition: { duration: 0.15, ease: "easeOut" }
-                  }}
-                  whileTap={{ 
-                    scale: 0.98,
-                    transition: { duration: 0.1 }
-                  }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
-                  viewport={{ once: true }}
-                  className={`flex items-center space-x-4 p-4 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl shadow-sm hover:shadow-lg hover:bg-white/20 transition-all duration-150 text-white ${social.color}`}
-                >
-                  <div className="flex-shrink-0">
-                    {social.icon}
-                  </div>
-                  <span className="font-medium">{social.name}</span>
-                  <div className="flex-grow"></div>
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
-                  </svg>
-                </motion.a>
-              ))}
+            <div className="card-dark p-8">
+              <h3 className="font-display text-2xl text-text-primary mb-6">
+                Conecte-se comigo
+              </h3>
+              <div className="space-y-3">
+                {socialLinks.map((social, index) => (
+                  <motion.a
+                    key={index}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    whileHover={{ x: 4 }}
+                    transition={{ duration: 0.2 }}
+                    viewport={{ once: true }}
+                    className="group flex items-center gap-4 p-4 bg-bg-secondary border border-border rounded-xl hover:border-primary transition-colors text-text-primary"
+                  >
+                    <div className="flex-shrink-0 text-primary">
+                      {social.icon}
+                    </div>
+                    <span className="font-medium flex-grow">{social.name}</span>
+                    <svg
+                      className="w-4 h-4 text-text-secondary group-hover:text-primary group-hover:translate-x-1 transition-all"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                  </motion.a>
+                ))}
+              </div>
             </div>
           </motion.div>
         </div>

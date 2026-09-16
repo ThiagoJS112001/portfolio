@@ -73,23 +73,36 @@ export default function Experience() {
   const isDiplomaPdf = activeDiploma?.url.toLowerCase().endsWith('.pdf')
 
   return (
-    <section id="experience" className="py-20 bg-bg-secondary">
+    <section id="experience" className="py-24 lg:py-32 bg-bg-secondary relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="section-title"
-        >
-          Experiência Profissional
-        </motion.h2>
+        {/* Cabeçalho editorial */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-4"
+          >
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="lg:col-span-8 lg:col-start-3 section-title text-center"
+          >
+            Experiência{' '}
+            <span className="italic text-primary">profissional.</span>
+          </motion.h2>
+        </div>
 
         <div className="relative">
           {/* Timeline line */}
-          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-0.5 bg-primary"></div>
+          <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 top-0 bottom-0 w-px bg-border"></div>
 
-          <div className="space-y-12">
+          <div className="space-y-16">
             {experiences.map((exp, index) => (
               <motion.div
                 key={index}
@@ -101,8 +114,8 @@ export default function Experience() {
                   index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
                 }`}
               >
-                {/* Timeline marker */}
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-4 h-4 bg-primary rounded-full border-4 border-white shadow-lg z-10"></div>
+                {/* Timeline marker (ponto lime com anel do fundo) */}
+                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-3 h-3 bg-primary rounded-full ring-4 ring-bg-secondary z-10"></div>
 
                 {/* Content */}
                 <div className={`ml-12 md:ml-0 md:w-1/2 ${
@@ -112,14 +125,14 @@ export default function Experience() {
                     <button
                       type="button"
                       onClick={() => openDiploma(exp)}
-                      className="w-full text-left bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 group"
+                      className="w-full text-left card-dark p-8 hover:border-primary transition-all duration-300 hover:-translate-y-1 cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary group"
                       aria-label={`Ver diploma de ${exp.title}`}
                     >
-                      <DiplomaContent exp={exp} />
+                      <DiplomaContent exp={exp} index={index} />
                     </button>
                   ) : (
-                    <div className="bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
-                      <DiplomaContent exp={exp} />
+                    <div className="card-dark p-8 hover:border-text-secondary transition-colors duration-300">
+                      <DiplomaContent exp={exp} index={index} />
                     </div>
                   )}
                 </div>
@@ -144,11 +157,11 @@ export default function Experience() {
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.85, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="relative w-full max-w-4xl bg-white rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
+              className="relative w-full max-w-4xl bg-bg-secondary border border-border rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
-              <div className="flex items-start justify-between p-6 border-b border-gray-200 gap-4">
+              <div className="flex items-start justify-between p-6 border-b border-border gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2 flex-wrap">
                     <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-primary/10 text-primary">
@@ -158,7 +171,7 @@ export default function Experience() {
                       Concluído em {activeDiploma.period}
                     </span>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
+                  <h3 className="text-xl md:text-2xl font-bold text-text-primary leading-tight">
                     {activeDiploma.title}
                   </h3>
                   <p className="text-sm text-text-secondary mt-1">
@@ -168,7 +181,7 @@ export default function Experience() {
                 <button
                   onClick={() => setDiplomaOpen(false)}
                   aria-label="Fechar modal"
-                  className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors flex-shrink-0"
+                  className="p-2 text-text-secondary hover:text-text-primary hover:bg-bg-tertiary rounded-lg transition-colors flex-shrink-0"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -177,7 +190,7 @@ export default function Experience() {
               </div>
 
               {/* Imagem / PDF */}
-              <div className="flex-1 overflow-auto bg-gray-50 p-4 md:p-6 flex items-center justify-center min-h-[300px]">
+              <div className="flex-1 overflow-auto bg-bg-primary p-4 md:p-6 flex items-center justify-center min-h-[300px]">
                 {isDiplomaPdf ? (
                   <iframe
                     src={`${activeDiploma.url}#toolbar=1&navpanes=0&scrollbar=1`}
@@ -215,7 +228,7 @@ export default function Experience() {
               </div>
 
               {/* Footer */}
-              <div className="flex items-center justify-end gap-2 p-4 border-t border-gray-200 bg-gray-50">
+              <div className="flex items-center justify-end gap-2 p-4 border-t border-border bg-bg-tertiary">
                 <a
                   href={activeDiploma.url}
                   download
@@ -248,33 +261,35 @@ export default function Experience() {
   )
 }
 
-function DiplomaContent({ exp }: { exp: { title: string; company: string; period: string; description: string; achievements: string[]; diplomaUrl: string | null } }) {
+function DiplomaContent({ exp, index }: { exp: { title: string; company: string; period: string; description: string; achievements: string[]; diplomaUrl: string | null }; index: number }) {
   return (
     <>
-      <div className="mb-4">
-        <h3 className="text-xl font-bold text-text-primary mb-2">
+      <div className="mb-6">
+        <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-primary mb-3">
+          {exp.period}
+        </p>
+        <h3 className="font-display text-2xl md:text-3xl text-text-primary mb-2 leading-tight">
           {exp.title}
         </h3>
-        <h4 className="text-lg font-semibold text-primary mb-2">
+        <p className="text-text-secondary font-medium">
           {exp.company}
-        </h4>
-        <span className="inline-block px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full">
-          {exp.period}
-        </span>
+        </p>
       </div>
 
-      <p className="text-text-secondary mb-4 leading-relaxed">
+      <p className="text-text-secondary mb-6 leading-relaxed">
         {exp.description}
       </p>
 
       {exp.achievements.length > 0 && (
-        <ul className="space-y-2">
+        <ul className="space-y-3">
           {exp.achievements.map((achievement, achievementIndex) => (
             <li
               key={achievementIndex}
               className="flex items-start text-text-secondary"
             >
-              <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3 mt-2 flex-shrink-0"></div>
+              <span className="font-mono text-xs text-primary mt-1 mr-3 flex-shrink-0">
+                →
+              </span>
               <span>{achievement}</span>
             </li>
           ))}
@@ -282,10 +297,10 @@ function DiplomaContent({ exp }: { exp: { title: string; company: string; period
       )}
 
       {exp.diplomaUrl && (
-        <div className="mt-4 pt-4 border-t border-border flex items-center justify-between">
-          <span className="text-xs text-text-secondary flex items-center gap-1.5">
+        <div className="mt-6 pt-6 border-t border-border flex items-center justify-between">
+          <span className="text-xs text-text-secondary flex items-center gap-2">
             <span className="text-base">🎓</span>
-            <span>Diploma disponível para visualização</span>
+            <span>Diploma disponível</span>
           </span>
           <span className="text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
             Ver diploma

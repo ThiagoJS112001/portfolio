@@ -23,28 +23,28 @@ const categoryStyles: Record<
   { badge: string; icon: string; gradient: string; border: string }
 > = {
   Cloud: {
-    badge: 'bg-red-50 text-red-700 border-red-200',
+    badge: 'bg-primary/10 text-primary border-primary/30',
     icon: '☁️',
-    gradient: 'from-red-500 to-orange-500',
-    border: 'hover:border-red-300',
+    gradient: 'from-primary to-primary-dark',
+    border: 'hover:border-primary',
   },
   APEX: {
-    badge: 'bg-orange-50 text-orange-700 border-orange-200',
+    badge: 'bg-accent/10 text-accent border-accent/30',
     icon: '⚡',
-    gradient: 'from-orange-500 to-amber-500',
-    border: 'hover:border-orange-300',
+    gradient: 'from-accent to-accent-dark',
+    border: 'hover:border-accent',
   },
   Idiomas: {
-    badge: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    badge: 'bg-primary/10 text-primary border-primary/30',
     icon: '🌐',
-    gradient: 'from-emerald-500 to-teal-500',
-    border: 'hover:border-emerald-300',
+    gradient: 'from-primary to-accent',
+    border: 'hover:border-primary',
   },
   Geral: {
-    badge: 'bg-slate-50 text-slate-700 border-slate-200',
+    badge: 'bg-bg-primary text-text-secondary border-border',
     icon: '🎓',
-    gradient: 'from-slate-500 to-gray-500',
-    border: 'hover:border-slate-300',
+    gradient: 'from-text-secondary to-text-light',
+    border: 'hover:border-text-secondary',
   },
 }
 
@@ -128,24 +128,37 @@ export default function Certifications() {
   }
 
   return (
-    <section id="certifications" className="py-20 bg-bg-secondary">
+    <section id="certifications" className="py-24 lg:py-32 bg-bg-primary relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="section-title"
-        >
-          Certificações & Cursos
-        </motion.h2>
+        {/* Cabeçalho centralizado */}
+        <div className="text-center mb-10 max-w-3xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="flex justify-center mb-5"
+          >
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="section-title"
+          >
+            Certificações{' '}
+            <span className="italic text-primary">& cursos.</span>
+          </motion.h2>
+        </div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           viewport={{ once: true }}
-          className="text-center text-text-secondary mb-12 max-w-2xl mx-auto"
+          className="text-text-secondary mb-16 max-w-2xl mx-auto text-center"
         >
           Formação contínua e validações oficiais que comprovam minha evolução
           técnica e profissional.
@@ -163,11 +176,11 @@ export default function Certifications() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className={`relative bg-white rounded-2xl p-6 shadow-md hover:shadow-xl border border-border ${style.border} transition-all duration-300 hover:-translate-y-1 group text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2`}
+                className={`relative card-dark p-6 hover:border-primary transition-all duration-300 hover:-translate-y-1 group text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary`}
                 aria-label={`Ver certificado: ${cert.title}`}
               >
                 {cert.highlight && (
-                  <div className="absolute -top-2 -right-2 bg-gradient-to-r from-primary to-accent text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                  <div className="absolute -top-2 -right-2 bg-primary text-text-inverse text-xs font-bold px-3 py-1 rounded-full">
                     Destaque
                   </div>
                 )}

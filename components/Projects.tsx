@@ -53,72 +53,99 @@ export default function Projects() {
   }
 
   return (
-    <section id="projects" className="py-20 bg-bg-secondary">
+    <section id="projects" className="py-24 lg:py-32 bg-bg-secondary relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-          className="section-title"
-        >
-          Projetos em Destaque
-        </motion.h2>
+        {/* Cabeçalho editorial */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="lg:col-span-4"
+          >
+          </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              viewport={{ once: true }}
-              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-200 group flex flex-col h-full"
-            >
-              {/* Project Image */}
-              <div className="relative h-56 sm:h-64 bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center overflow-hidden p-4">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-contain transition-transform duration-200 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-300"></div>
-              </div>
+          <motion.h2
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            viewport={{ once: true }}
+            className="lg:col-span-8 lg:col-start-3 section-title text-center"
+          >
+            Projetos em{' '}
+            <span className="italic text-primary">destaque.</span>
+          </motion.h2>
+        </div>
 
-              {/* Project Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-bold text-text-primary mb-3 group-hover:text-primary transition-colors duration-200">
-                  {project.title}
-                </h3>
-                
-                <p className="text-text-secondary mb-4 leading-relaxed flex-grow">
-                  {project.description}
-                </p>
-
-                {/* Technologies */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+        {/* Zigzag — alterna imagem à esquerda/direita */}
+        <div className="space-y-20 lg:space-y-28">
+          {projects.map((project, index) => {
+            const isReversed = index % 2 === 1
+            return (
+              <motion.article
+                key={index}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
+                  isReversed ? 'lg:[&>*:first-child]:order-2' : ''
+                }`}
+              >
+                {/* Imagem */}
+                <div
+                  className={`lg:col-span-7 ${
+                    isReversed ? 'lg:order-2' : ''
+                  }`}
+                >
+                  <div className="relative aspect-[4/3] bg-bg-tertiary border border-border rounded-2xl overflow-hidden group">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-accent/5" />
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="relative w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-105"
+                    />
+                  </div>
                 </div>
 
-                {/* Project Link */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => openProjectModal(project)}
-                  className="btn btn-primary btn-small w-full text-center mt-auto"
+                {/* Texto */}
+                <div
+                  className={`lg:col-span-5 ${isReversed ? 'lg:order-1' : ''}`}
                 >
-                  Ver Projeto
-                </motion.button>
-              </div>
-            </motion.div>
-          ))}
+                  <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4 leading-tight">
+                    {project.title}
+                  </h3>
+                  <p className="text-text-secondary mb-6 leading-relaxed">
+                    {project.description}
+                  </p>
+
+                  <motion.button
+                    whileHover={{ x: 4 }}
+                    whileTap={{ scale: 0.97 }}
+                    transition={{ duration: 0.15 }}
+                    onClick={() => openProjectModal(project)}
+                    className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-dark transition-colors group"
+                  >
+                    Ver detalhes
+                    <svg
+                      className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </motion.button>
+                </div>
+              </motion.article>
+            )
+          })}
         </div>
       </div>
 

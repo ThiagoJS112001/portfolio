@@ -51,33 +51,39 @@ export default function Header() {
 
   return (
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/98 backdrop-blur-lg shadow-lg border-b border-border' 
-        : 'bg-white/95 backdrop-blur-sm'
+      isScrolled
+        ? 'bg-bg-primary/90 backdrop-blur-lg shadow-lg border-b border-border'
+        : 'bg-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <span className="text-2xl font-bold gradient-text">TS</span>
+            <button
+              onClick={() => scrollToSection('home')}
+              className="font-display text-2xl text-text-primary hover:text-primary transition-colors"
+              aria-label="Ir para o início"
+            >
+              T<span className="text-primary">.</span>S
+            </button>
           </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              {navItems.map((item) => (
+            <div className="ml-10 flex items-baseline space-x-1">
+              {navItems.map((item, index) => (
                 <button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`px-3 py-2 text-sm font-medium transition-colors duration-300 relative ${
+                  className={`group relative px-4 py-2 text-sm font-medium transition-colors duration-300 ${
                     activeSection === item.id
                       ? 'text-primary'
-                      : 'text-text-primary hover:text-primary'
+                      : 'text-text-secondary hover:text-text-primary'
                   }`}
                 >
                   {item.label}
                   {activeSection === item.id && (
-                    <span className="absolute bottom-0 left-0 w-full h-0.5 bg-primary transform scale-100 transition-transform duration-300"></span>
+                    <span className="absolute -bottom-0.5 left-4 right-4 h-px bg-primary" />
                   )}
                 </button>
               ))}
@@ -88,7 +94,7 @@ export default function Header() {
           <div className="md:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-text-primary hover:text-primary hover:bg-bg-secondary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+              className="inline-flex items-center justify-center p-2 rounded-md text-text-primary hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
             >
               <span className="sr-only">Abrir menu principal</span>
               <div className={`hamburger ${isMenuOpen ? 'active' : ''}`}>
@@ -110,16 +116,16 @@ export default function Header() {
       {/* Mobile Navigation */}
       <div className={`md:hidden transition-all duration-300 ${
         isMenuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-      } overflow-hidden bg-white border-t border-border`}>
+      } overflow-hidden bg-bg-primary border-t border-border`}>
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navItems.map((item) => (
+          {navItems.map((item, index) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className={`block px-3 py-2 text-base font-medium w-full text-left transition-colors duration-300 ${
+              className={`flex items-center gap-3 px-3 py-3 text-base font-medium w-full text-left transition-colors duration-300 ${
                 activeSection === item.id
-                  ? 'text-primary bg-bg-secondary'
-                  : 'text-text-primary hover:text-primary hover:bg-bg-secondary'
+                  ? 'text-primary'
+                  : 'text-text-primary hover:text-primary'
               }`}
             >
               {item.label}
