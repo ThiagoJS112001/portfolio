@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import CertificateModal from './CertificateModal'
 
 type Category = 'Cloud' | 'Idiomas' | 'APEX' | 'Geral'
@@ -97,15 +97,34 @@ const certifications: Certification[] = [
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  // Limpa qualquer timeout pendente ao desmontar o componente
+  useEffect(() => {
+    return () => {
+      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    }
+  }, [])
 
   const handleOpen = (cert: Certification) => {
+    // Cancela timeout pendente do handleClose anterior para não sobrescrever
+    // o novo certificado selecionado
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current)
+      closeTimeoutRef.current = null
+    }
     setSelectedCert(cert)
     setIsModalOpen(true)
   }
 
   const handleClose = () => {
     setIsModalOpen(false)
-    setTimeout(() => setSelectedCert(null), 300)
+    // Aguarda a animação de saída antes de limpar o certificado
+    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
+    closeTimeoutRef.current = setTimeout(() => {
+      setSelectedCert(null)
+      closeTimeoutRef.current = null
+    }, 300)
   }
 
   return (

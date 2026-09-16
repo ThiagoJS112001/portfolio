@@ -83,12 +83,21 @@ export default function CertificateModal({
     }
   }, [isOpen])
 
-  // Reset state when certificate or current index changes
+  // Reset current index and errors when certificate changes
+  // (including when modal closes and certificate becomes null)
+  useEffect(() => {
+    setCurrentIndex(0)
+    setImageError(false)
+    setPdfError(false)
+    setFileNotFound(false)
+  }, [certificate])
+
+  // Reset errors when navigating between images in the carousel
   useEffect(() => {
     setImageError(false)
     setPdfError(false)
     setFileNotFound(false)
-  }, [certificate, currentIndex])
+  }, [currentIndex])
 
   if (!isOpen || !certificate) return null
 

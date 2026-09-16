@@ -17,13 +17,21 @@
 .DS_Store
 *.pem
 
+# Scripts de rascunho / Windows (não fazem parte do app Next.js)
+*.bat
+*.ps1
+
 # Debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
 # Local env files
+.env
+.env.local
 .env*.local
+.env.production
+.env.development
 
 # Vercel
 .vercel
