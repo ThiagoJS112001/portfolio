@@ -36,14 +36,14 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.3 }}
             className="lg:col-span-7 text-center lg:text-left order-2 lg:order-1"
           >
             {/* Eyebrow com número de seção */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.25 }}
               className="flex items-center justify-center lg:justify-start gap-3 mb-8"
             >
               <span className="font-mono text-xs uppercase tracking-[0.3em] text-primary">
@@ -55,7 +55,7 @@ export default function Hero() {
               className="font-display text-6xl sm:text-7xl lg:text-[5.5rem] leading-[0.95] tracking-tight text-text-primary mb-6"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.3 }}
             >
               Thiago
               <br />
@@ -66,7 +66,7 @@ export default function Hero() {
               className="text-xl sm:text-2xl text-text-primary mb-4 font-light"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.3 }}
             >
               Desenvolvedor{' '}
               <span className="text-primary font-medium">Oracle APEX</span>
@@ -76,7 +76,7 @@ export default function Hero() {
               className="text-base text-text-secondary mb-10 max-w-xl mx-auto lg:mx-0 leading-relaxed"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
+              transition={{ duration: 0.3 }}
             >
               Especialista em desenvolvimento de aplicações empresariais com
               Oracle APEX, criando soluções eficientes e inovadoras que agregam
@@ -87,7 +87,7 @@ export default function Hero() {
               className="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.7 }}
+              transition={{ duration: 0.3 }}
             >
               <button
                 onClick={() => scrollToSection('contact')}
@@ -121,7 +121,7 @@ export default function Hero() {
           <motion.div
             initial={{ opacity: 0, scale: 0.92, rotate: 0 }}
             animate={{ opacity: 1, scale: 1, rotate: 3 }}
-            transition={{ duration: 1, delay: 0.3 }}
+            transition={{ duration: 0.4 }}
             className="lg:col-span-5 flex justify-center lg:justify-end order-1 lg:order-2"
           >
             <div className="relative">
@@ -165,7 +165,7 @@ export default function Hero() {
         onClick={() => scrollToSection('about')}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        transition={{ duration: 0.3, delay: 0.2 }}
         aria-label="Rolar para próxima seção"
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-text-secondary hover:text-primary transition-colors group"
       >
