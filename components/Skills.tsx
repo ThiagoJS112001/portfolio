@@ -1,10 +1,4 @@
-'use client'
-
-import { motion } from 'framer-motion'
-import { useState, useEffect } from 'react'
-
 export default function Skills() {
-  const [visibleSkills, setVisibleSkills] = useState<string[]>([])
 
   const skillCategories = [
     {
@@ -40,62 +34,29 @@ export default function Skills() {
     },
   ]
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const skillName = entry.target.getAttribute('data-skill')
-            if (skillName && !visibleSkills.includes(skillName)) {
-              setVisibleSkills((prev) => [...prev, skillName])
-            }
-          }
-        })
-      },
-      { threshold: 0.5 }
-    )
-
-    const skillElements = document.querySelectorAll('[data-skill]')
-    skillElements.forEach((el) => observer.observe(el))
-
-    return () => observer.disconnect()
-  }, [visibleSkills])
-
   return (
     <section id="skills" className="py-24 lg:py-32 bg-bg-primary relative">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Cabeçalho editorial */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          <div
             className="lg:col-span-4"
           >
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+          <h2
             className="lg:col-span-8 lg:col-start-3 section-title text-center"
           >
             Habilidades{' '}
             <span className="italic text-primary">técnicas.</span>
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Grid simétrico — 3 cards com mesmo tamanho */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
           {skillCategories.map((category, categoryIndex) => (
-            <motion.div
+            <div
               key={categoryIndex}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: categoryIndex * 0.15 }}
-              viewport={{ once: true }}
               className="card-dark p-8 hover:border-primary/40 transition-colors duration-300"
             >
               {/* Cabeçalho do card */}
@@ -108,7 +69,7 @@ export default function Skills() {
 
               <div className="space-y-6">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex} data-skill={skill.name}>
+                  <div key={skillIndex}>
                     <div className="flex justify-between items-baseline mb-2">
                       <span className="text-text-primary font-medium">
                         {skill.name}
@@ -119,19 +80,15 @@ export default function Skills() {
                     </div>
 
                     <div className="w-full bg-bg-primary rounded-full h-1 overflow-hidden">
-                      <motion.div
+                      <div
                         className="bg-primary h-full rounded-full"
-                        initial={{ width: 0 }}
-                        animate={{
-                          width: visibleSkills.includes(skill.name) ? `${skill.level}%` : 0,
-                        }}
-                        transition={{ duration: 1.2, delay: skillIndex * 0.15 }}
+                        style={{ width: `${skill.level}%` }}
                       />
                     </div>
                   </div>
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

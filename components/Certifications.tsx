@@ -1,8 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import CertificateModal from './CertificateModal'
+import dynamic from 'next/dynamic'
+
+const CertificateModal = dynamic(() => import('./CertificateModal'))
 
 type Category = 'Cloud' | 'Idiomas' | 'APEX' | 'Geral'
 
@@ -132,50 +133,34 @@ export default function Certifications() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Cabeçalho centralizado */}
         <div className="text-center mb-10 max-w-3xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          <div
             className="flex justify-center mb-5"
           >
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+          <h2
             className="section-title"
           >
             Certificações{' '}
             <span className="italic text-primary">& cursos.</span>
-          </motion.h2>
+          </h2>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
+        <p
           className="text-text-secondary mb-16 max-w-2xl mx-auto text-center"
         >
           Formação contínua e validações oficiais que comprovam minha evolução
           técnica e profissional.
-        </motion.p>
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {certifications.map((cert, index) => {
             const style = categoryStyles[cert.category]
             return (
-              <motion.button
+              <button
                 key={index}
                 type="button"
                 onClick={() => handleOpen(cert)}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className={`relative card-dark p-6 hover:border-primary transition-all duration-300 hover:-translate-y-1 group text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary`}
                 aria-label={`Ver certificado: ${cert.title}`}
               >
@@ -294,29 +279,25 @@ export default function Certifications() {
                     </span>
                   </div>
                 )}
-              </motion.button>
+              </button>
             )
           })}
         </div>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
+        <div
           className="mt-12 text-center"
         >
           <p className="text-text-secondary text-sm">
             � Clique em qualquer certificado para visualizar
           </p>
-        </motion.div>
+        </div>
       </div>
 
-      <CertificateModal
+      {selectedCert && <CertificateModal
         isOpen={isModalOpen}
         onClose={handleClose}
         certificate={selectedCert}
-      />
+      />}
     </section>
   )
 }

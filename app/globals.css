@@ -9,6 +9,10 @@
     width: 100%;
   }
 
+  section[id] {
+    scroll-margin-top: 80px;
+  }
+
   body {
     overflow-x: hidden;
     position: relative;
@@ -38,6 +42,12 @@
   ::selection {
     background-color: #D4F500;
     color: #0A0A0A;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
   }
 }
 

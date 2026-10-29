@@ -8,27 +8,36 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
 
   useEffect(() => {
+    let frame: number | null = null
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
-      
-      // Update active section based on scroll position
-      const sections = ['home', 'about', 'experience', 'skills', 'certifications', 'projects', 'contact']
-      const current = sections.find(section => {
-        const element = document.getElementById(section)
-        if (element) {
-          const rect = element.getBoundingClientRect()
-          return rect.top <= 200 && rect.bottom >= 200
-        }
-        return false
+      if (frame !== null) return
+      frame = window.requestAnimationFrame(() => {
+        frame = null
+        setIsScrolled(window.scrollY > 50)
+
+        // Update active section based on scroll position
+        const sections = ['home', 'about', 'experience', 'skills', 'certifications', 'projects', 'contact']
+        const current = sections.find(section => {
+          const element = document.getElementById(section)
+          if (element) {
+            const rect = element.getBoundingClientRect()
+            return rect.top <= 200 && rect.bottom >= 200
+          }
+          return false
       })
       
       if (current) {
         setActiveSection(current)
       }
+      })
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (frame !== null) window.cancelAnimationFrame(frame)
+    }
   }, [])
 
   const scrollToSection = (sectionId: string) => {

@@ -1,7 +1,3 @@
-'use client'
-
-import { motion } from 'framer-motion'
-
 export default function Contact() {
   const contactInfo = [
     {
@@ -65,54 +61,34 @@ export default function Contact() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Cabeçalho editorial */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          <div
             className="lg:col-span-4"
           >
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+          <h2
             className="lg:col-span-8 lg:col-start-3 section-title text-center"
           >
             Vamos trabalhar{' '}
             <span className="italic text-primary">juntos.</span>
-          </motion.h2>
+          </h2>
         </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          viewport={{ once: true }}
+        <p
           className="text-text-secondary text-lg max-w-2xl mx-auto mb-16 text-center"
         >
           Interessado em colaborar ou tem algum projeto em mente?
           Ficarei feliz em conversar sobre como posso ajudar.
-        </motion.p>
+        </p>
 
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-start">
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+          <div
             className="space-y-6"
           >
             {contactInfo.map((info, index) => (
-              <motion.div
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className="group flex items-start gap-5"
               >
                 <div className="flex-shrink-0 w-12 h-12 card-dark flex items-center justify-center text-primary group-hover:border-primary transition-colors">
@@ -133,16 +109,12 @@ export default function Contact() {
                     <p className="text-text-primary text-lg">{info.value}</p>
                   )}
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Social Links */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+          <div
           >
             <div className="card-dark p-8">
               <h3 className="font-display text-2xl text-text-primary mb-6">
@@ -150,16 +122,11 @@ export default function Contact() {
               </h3>
               <div className="space-y-3">
                 {socialLinks.map((social, index) => (
-                  <motion.a
+                  <a
                     key={index}
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    whileHover={{ x: 4 }}
-                    transition={{ duration: 0.2 }}
-                    viewport={{ once: true }}
                     className="group flex items-center gap-4 p-4 bg-bg-secondary border border-border rounded-xl hover:border-primary transition-colors text-text-primary"
                   >
                     <div className="flex-shrink-0 text-primary">
@@ -174,11 +141,11 @@ export default function Contact() {
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
                     </svg>
-                  </motion.a>
+                  </a>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

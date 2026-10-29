@@ -1,8 +1,9 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import { useState } from 'react'
-import ProjectModal from './ProjectModal'
+import dynamic from 'next/dynamic'
+
+const ProjectModal = dynamic(() => import('./ProjectModal'))
 
 export default function Projects() {
   const [selectedProject, setSelectedProject] = useState<any>(null)
@@ -57,25 +58,17 @@ export default function Projects() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Cabeçalho editorial */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
+          <div
             className="lg:col-span-4"
           >
-          </motion.div>
+          </div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            viewport={{ once: true }}
+          <h2
             className="lg:col-span-8 lg:col-start-3 section-title text-center"
           >
             Projetos em{' '}
             <span className="italic text-primary">destaque.</span>
-          </motion.h2>
+          </h2>
         </div>
 
         {/* Zigzag — alterna imagem à esquerda/direita */}
@@ -83,12 +76,8 @@ export default function Projects() {
           {projects.map((project, index) => {
             const isReversed = index % 2 === 1
             return (
-              <motion.article
+              <article
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.7, delay: index * 0.1 }}
-                viewport={{ once: true }}
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
                   isReversed ? 'lg:[&>*:first-child]:order-2' : ''
                 }`}
@@ -104,6 +93,10 @@ export default function Projects() {
                     <img
                       src={project.image}
                       alt={project.title}
+                      loading="lazy"
+                      decoding="async"
+                      width={640}
+                      height={480}
                       className="relative w-full h-full object-contain p-8 transition-transform duration-500 group-hover:scale-105"
                     />
                   </div>
@@ -120,10 +113,8 @@ export default function Projects() {
                     {project.description}
                   </p>
 
-                  <motion.button
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.97 }}
-                    transition={{ duration: 0.15 }}
+                  <button
+
                     onClick={() => openProjectModal(project)}
                     className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-dark transition-colors group"
                   >
@@ -141,9 +132,9 @@ export default function Projects() {
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
-                  </motion.button>
+                  </button>
                 </div>
-              </motion.article>
+              </article>
             )
           })}
         </div>
