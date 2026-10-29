@@ -1,53 +1,13 @@
 'use client'
 
 import { useState } from 'react'
+import { projects, type Project } from './project-data'
 import dynamic from 'next/dynamic'
 
 const ProjectModal = dynamic(() => import('./ProjectModal'))
 
 export default function Projects() {
-  const [selectedProject, setSelectedProject] = useState<any>(null)
-
-  const projects = [
-    {
-      title: 'Kaizen',
-      description: 'Sistema de melhoria contínua desenvolvido em Oracle APEX, focado em otimização de processos e gestão de qualidade.',
-      image: '/images/kaizen.svg',
-      technologies: ['Oracle APEX', 'PL/SQL', 'JavaScript'],
-      link: '#',
-      gallery: [
-        '/kaizen-screenshots/kaizen-dashboard-real.png',
-        '/kaizen-screenshots/kaizen-form-real.png', 
-        '/kaizen-screenshots/kaizen-list-real.png'
-      ],
-      detailedDescription: 'Sistema completo de gestão Kaizen desenvolvido em Oracle APEX. Inclui módulos para criação de ideias, premiação, indicadores de performance e parametrização. Interface moderna e intuitiva com dashboards interativos e relatórios detalhados.'
-    },
-    {
-      title: 'Sistema de Indicadores de Performance',
-      description: 'Plataforma completa para monitoramento de KPIs empresariais em tempo real, com alertas automáticos e análise de tendências para tomada de decisão.',
-      image: '/images/indicadores.svg',
-      technologies: ['Oracle APEX', 'PL/SQL', 'JavaScript'],
-      link: '#',
-      gallery: [],
-      detailedDescription: 'Dashboard avançado para monitoramento de indicadores chave de performance.'
-    },
-    {
-      title: 'Suporte Técnico Oracle APEX',
-      description: 'Serviços especializados de suporte e manutenção para sistemas Oracle APEX, incluindo correção de bugs, otimização de performance e consultoria técnica.',
-      image: '/images/suporte-apex.svg',
-      technologies: ['Oracle APEX', 'PL/SQL', 'JavaScript'],
-      link: '#',
-      gallery: [],
-      detailedDescription: 'Serviços completos de suporte e consultoria para sistemas Oracle APEX.'
-    },
-  ]
-
-  const openProjectModal = (project: any) => {
-    setSelectedProject({
-      title: project.title,
-      description: project.detailedDescription
-    })
-  }
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null)
 
   const closeModal = () => {
     setSelectedProject(null)
@@ -77,7 +37,7 @@ export default function Projects() {
             const isReversed = index % 2 === 1
             return (
               <article
-                key={index}
+                key={project.id}
                 className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center ${
                   isReversed ? 'lg:[&>*:first-child]:order-2' : ''
                 }`}
@@ -106,6 +66,7 @@ export default function Projects() {
                 <div
                   className={`lg:col-span-5 ${isReversed ? 'lg:order-1' : ''}`}
                 >
+                  <p className="mb-3 font-mono text-xs uppercase tracking-widest text-primary">{project.category}</p>
                   <h3 className="font-display text-3xl md:text-4xl lg:text-5xl text-text-primary mb-4 leading-tight">
                     {project.title}
                   </h3>
@@ -113,12 +74,17 @@ export default function Projects() {
                     {project.description}
                   </p>
 
+                  <ul className="mb-6 flex flex-wrap gap-2" aria-label="Tecnologias">
+                    {project.technologies.map((technology) => <li key={technology} className="rounded-full border border-border px-3 py-1 font-mono text-xs text-text-secondary">{technology}</li>)}
+                  </ul>
                   <button
 
-                    onClick={() => openProjectModal(project)}
+                    onClick={() => setSelectedProject(project)}
+                    aria-haspopup="dialog"
+                    aria-label={`Ver detalhes de ${project.title}`}
                     className="inline-flex items-center gap-2 text-primary font-medium hover:text-primary-dark transition-colors group"
                   >
-                    Ver detalhes
+                    {project.gallery.length ? 'Explorar projeto e telas' : 'Conhecer a solução'}
                     <svg
                       className="w-4 h-4 transition-transform group-hover:translate-x-1"
                       fill="none"
@@ -143,7 +109,6 @@ export default function Projects() {
       {/* Project Modal */}
       {selectedProject && (
         <ProjectModal
-          isOpen={!!selectedProject}
           onClose={closeModal}
           project={selectedProject}
         />

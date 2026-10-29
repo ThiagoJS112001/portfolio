@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import dynamic from 'next/dynamic'
 
 const CertificateModal = dynamic(() => import('./CertificateModal'))
@@ -98,34 +98,15 @@ const certifications: Certification[] = [
 export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState<Certification | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
-  const closeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  // Limpa qualquer timeout pendente ao desmontar o componente
-  useEffect(() => {
-    return () => {
-      if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
-    }
-  }, [])
 
   const handleOpen = (cert: Certification) => {
-    // Cancela timeout pendente do handleClose anterior para não sobrescrever
-    // o novo certificado selecionado
-    if (closeTimeoutRef.current) {
-      clearTimeout(closeTimeoutRef.current)
-      closeTimeoutRef.current = null
-    }
     setSelectedCert(cert)
     setIsModalOpen(true)
   }
 
   const handleClose = () => {
     setIsModalOpen(false)
-    // Aguarda a animação de saída antes de limpar o certificado
-    if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current)
-    closeTimeoutRef.current = setTimeout(() => {
-      setSelectedCert(null)
-      closeTimeoutRef.current = null
-    }, 300)
+    setSelectedCert(null)
   }
 
   return (
@@ -288,7 +269,7 @@ export default function Certifications() {
           className="mt-12 text-center"
         >
           <p className="text-text-secondary text-sm">
-            � Clique em qualquer certificado para visualizar
+            Clique em qualquer certificado para visualizar
           </p>
         </div>
       </div>

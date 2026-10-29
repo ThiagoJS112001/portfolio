@@ -1,7 +1,7 @@
 'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useState, useEffect } from 'react'
+import Modal from './Modal'
+import { useState } from 'react'
 
 export default function Experience() {
   const [diplomaOpen, setDiplomaOpen] = useState(false)
@@ -12,31 +12,10 @@ export default function Experience() {
     period: string
   } | null>(null)
 
-  // ESC fecha o modal
-  useEffect(() => {
-    const handleKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && diplomaOpen) setDiplomaOpen(false)
-    }
-    window.addEventListener('keydown', handleKey)
-    return () => window.removeEventListener('keydown', handleKey)
-  }, [diplomaOpen])
-
-  // Bloqueia scroll do body
-  useEffect(() => {
-    if (diplomaOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [diplomaOpen])
-
   const experiences = [
     {
       title: 'Desenvolvedor Oracle APEX',
-      company: 'Empresa Atual',
+      company: 'Easy Process EHS-S',
       period: '2022 - Presente',
       description:
         'Desenvolvimento de aplicações empresariais utilizando Oracle APEX, criação de dashboards, relatórios e sistemas integrados. Responsável pela análise de requisitos, modelagem de dados e implementação de soluções.',
@@ -50,7 +29,7 @@ export default function Experience() {
     },
     {
       title: 'Análise e Desenvolvimento de Sistemas',
-      company: 'Instituição de Ensino',
+      company: 'UNIASSELVI',
       period: '2020 - 2023',
       description:
         'Formação em Análise e Desenvolvimento de Sistemas, com foco em desenvolvimento web, banco de dados e metodologias de desenvolvimento de software.',
@@ -131,20 +110,13 @@ export default function Experience() {
       </div>
 
       {/* Modal do Diploma */}
-      <AnimatePresence>
         {diplomaOpen && activeDiploma && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
-            onClick={() => setDiplomaOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.85, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+          <Modal titleId="diploma-title" onClose={() => setDiplomaOpen(false)}>
+            <div
+
+
+
+
               className="relative w-full max-w-4xl bg-bg-secondary border border-border rounded-2xl overflow-hidden shadow-2xl max-h-[90vh] flex flex-col"
               onClick={(e) => e.stopPropagation()}
             >
@@ -159,7 +131,7 @@ export default function Experience() {
                       Concluído em {activeDiploma.period}
                     </span>
                   </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-text-primary leading-tight">
+                  <h3 id="diploma-title" className="text-xl md:text-2xl font-bold text-text-primary leading-tight">
                     {activeDiploma.title}
                   </h3>
                   <p className="text-sm text-text-secondary mt-1">
@@ -241,10 +213,9 @@ export default function Experience() {
                   Abrir
                 </a>
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </Modal>
         )}
-      </AnimatePresence>
     </section>
   )
 }

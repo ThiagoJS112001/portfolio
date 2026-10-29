@@ -75,10 +75,10 @@ export default function Hero() {
                 </svg>
               </a>
               <a
-                href="#about"
+                href="#projects"
                 className="btn btn-secondary"
               >
-                Saiba Mais
+                Conheça meus projetos
               </a>
             </div>
           </div>

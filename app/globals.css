@@ -13,6 +13,11 @@
     scroll-margin-top: 80px;
   }
 
+  :focus-visible {
+    outline: 2px solid #D4F500;
+    outline-offset: 4px;
+  }
+
   body {
     overflow-x: hidden;
     position: relative;

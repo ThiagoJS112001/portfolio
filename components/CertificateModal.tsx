@@ -1,6 +1,7 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
+import Modal from './Modal'
 import { useEffect, useState, useCallback } from 'react'
 
 interface CertificateModalProps {
@@ -57,9 +58,7 @@ export default function CertificateModal({
   useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
       if (!isOpen) return
-      if (e.key === 'Escape') {
-        onClose()
-      } else if (hasCarousel && e.key === 'ArrowLeft') {
+      if (hasCarousel && e.key === 'ArrowLeft') {
         goPrev()
       } else if (hasCarousel && e.key === 'ArrowRight') {
         goNext()
@@ -70,18 +69,6 @@ export default function CertificateModal({
     return () => window.removeEventListener('keydown', handleKeyPress)
   }, [isOpen, onClose, hasCarousel, goPrev, goNext])
 
-  // Control body overflow when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
-
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen])
 
   // Reset current index and errors when certificate changes
   // (including when modal closes and certificate becomes null)
@@ -104,14 +91,7 @@ export default function CertificateModal({
   const fileName = currentUrl.split('/').pop() || 'certificado'
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
-        onClick={onClose}
-      >
+    <Modal titleId="certificate-title" onClose={onClose}>
         <motion.div
           initial={{ scale: 0.85, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
@@ -146,7 +126,7 @@ export default function CertificateModal({
                   </span>
                 )}
               </div>
-              <h3 className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
+              <h3 id="certificate-title" className="text-xl md:text-2xl font-bold text-gray-900 leading-tight">
                 {certificate.title}
               </h3>
               <p className="text-sm text-text-secondary mt-1">
@@ -333,8 +313,7 @@ export default function CertificateModal({
             </div>
           </div>
         </motion.div>
-      </motion.div>
-    </AnimatePresence>
+    </Modal>
   )
 }
 

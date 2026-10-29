@@ -1,87 +1,64 @@
-'use client'
+﻿'use client'
 
-import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect } from 'react'
+import { useState } from 'react'
+import Modal from './Modal'
+import type { Project } from './project-data'
 
-interface ProjectModalProps {
-  isOpen: boolean
-  onClose: () => void
-  project: {
-    title: string
-    description: string
-  }
-}
-
-export default function ProjectModal({ isOpen, onClose, project }: ProjectModalProps) {
-  
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (!isOpen) return
-      
-      if (e.key === 'Escape') {
-        onClose()
-      }
-    }
-
-    window.addEventListener('keydown', handleKeyPress)
-    return () => window.removeEventListener('keydown', handleKeyPress)
-  }, [isOpen])
-
-  // Control body overflow when modal is open
-  useEffect(() => {
-    if (isOpen) {
-      // Previne scroll do body quando modal está aberto
-      document.body.style.overflow = 'hidden'
-    } else {
-      // Restaura scroll do body quando modal fecha
-      document.body.style.overflow = 'unset'
-    }
-
-    // Cleanup quando componente é desmontado
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [isOpen])
-
-  if (!isOpen) return null
+export default function ProjectModal({ onClose, project }: { onClose: () => void; project: Project }) {
+  const [activeImage, setActiveImage] = useState(0)
+  const [failedImage, setFailedImage] = useState<string | null>(null)
+  const image = project.gallery[activeImage]
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
-        onClick={onClose}
-      >
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.8, opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="relative w-full max-w-2xl bg-white rounded-2xl overflow-hidden shadow-2xl"
-          onClick={(e) => e.stopPropagation()}
-        >
-          {/* Header */}
-          <div className="flex items-center justify-between p-6 border-b border-gray-200">
-            <h3 className="text-2xl font-bold text-gray-900">{project.title}</h3>
-            <button
-              onClick={onClose}
-              className="p-2 text-gray-400 hover:text-gray-600 transition-colors"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+    <Modal titleId="project-title" onClose={onClose}>
+      <div className="flex max-h-[90dvh] w-full max-w-5xl flex-col overflow-hidden rounded-2xl border border-border bg-bg-secondary shadow-2xl">
+        <div className="flex items-start justify-between gap-4 border-b border-border p-5 sm:p-8">
+          <div>
+            <p className="mb-2 font-mono text-xs uppercase tracking-widest text-primary">{project.category}</p>
+            <h2 id="project-title" className="font-display text-3xl sm:text-4xl">{project.title}</h2>
           </div>
-
-          {/* Description */}
-          <div className="p-8">
-            <p className="text-gray-600 leading-relaxed text-lg">{project.description}</p>
+          <button type="button" onClick={onClose} aria-label="Fechar detalhes do projeto" className="shrink-0 rounded-lg px-3 py-2 text-2xl hover:bg-bg-tertiary">×</button>
+        </div>
+        <div className="overflow-y-auto overscroll-contain p-5 sm:p-8">
+          <div className="mb-8 flex flex-wrap gap-2" aria-label="Tecnologias utilizadas">
+            {project.technologies.map((technology) => <span key={technology} className="rounded-full border border-border px-3 py-1 font-mono text-xs text-text-secondary">{technology}</span>)}
           </div>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+          <div className="mb-8 grid gap-6 sm:grid-cols-2">
+            <div><h3 className="mb-2 text-lg font-medium text-primary">Contexto</h3><p className="leading-relaxed text-text-secondary">{project.context}</p></div>
+            <div><h3 className="mb-2 text-lg font-medium text-primary">Solução</h3><p className="leading-relaxed text-text-secondary">{project.solution}</p></div>
+          </div>
+          <h3 className="mb-3 text-lg font-medium">O que a solução inclui</h3>
+          <ul className="mb-10 space-y-3 text-text-secondary">
+            {project.deliverables.map((item) => <li key={item} className="flex gap-3"><span aria-hidden="true" className="text-primary">→</span>{item}</li>)}
+          </ul>
+          {image && (
+            <section aria-label="Telas do projeto" className="mb-8">
+              <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                <h3 className="text-lg font-medium">Por dentro da aplicação</h3>
+                <span aria-live="polite" className="font-mono text-xs text-text-secondary">Tela {activeImage + 1} de {project.gallery.length}</span>
+              </div>
+              <figure>
+                {failedImage === image.src ? (
+                  <p role="status" className="rounded-xl border border-border p-8 text-text-secondary">Não foi possível carregar esta imagem. Use o link abaixo para abrir a tela.</p>
+                ) : (
+                  <img src={image.src} alt={image.caption} width={1858} height={843} decoding="async" onError={() => setFailedImage(image.src)} className="max-h-[55vh] w-full rounded-xl border border-border bg-bg-tertiary object-contain" />
+                )}
+                <figcaption className="mt-3 text-sm text-text-secondary">{image.caption}</figcaption>
+              </figure>
+              <div className="mt-4 flex flex-wrap gap-2" aria-label="Selecionar tela">
+                {project.gallery.map((item, index) => (
+                  <button key={item.src} type="button" aria-pressed={activeImage === index} onClick={() => setActiveImage(index)} className={`rounded-full border px-4 py-2 text-sm ${activeImage === index ? 'border-primary bg-primary text-text-inverse' : 'border-border hover:border-primary'}`}>Tela {index + 1}</button>
+                ))}
+                <a href={image.src} target="_blank" rel="noopener noreferrer" className="px-3 py-2 text-sm text-primary underline underline-offset-4">Abrir imagem em nova aba</a>
+              </div>
+            </section>
+          )}
+          <div className="flex flex-wrap items-center justify-between gap-4 border-t border-border pt-6">
+            <p className="text-sm text-text-secondary">Vamos conversar sobre uma solução para o seu negócio?</p>
+            <a href="#contact" onClick={onClose} className="btn btn-primary">Entrar em contato</a>
+          </div>
+        </div>
+      </div>
+    </Modal>
   )
 }

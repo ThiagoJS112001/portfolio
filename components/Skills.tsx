@@ -1,93 +1,54 @@
-export default function Skills() {
-
-  const skillCategories = [
+﻿export default function Skills() {
+  const categories = [
     {
-      title: 'Desenvolvimento',
-      description: 'Stack principal e tecnologias do dia a dia.',
-      size: 'medium',
+      title: 'Aplicações empresariais',
+      description: 'Desenvolvimento de soluções para processos de negócio.',
       skills: [
-        { name: 'Oracle APEX', level: 90 },
-        { name: 'SQL/PL-SQL', level: 85 },
-        { name: 'JavaScript', level: 75 },
-        { name: 'HTML/CSS', level: 80 },
+        { name: 'Oracle APEX', detail: 'Aplicações, formulários, dashboards e relatórios.' },
+        { name: 'SQL e PL/SQL', detail: 'Consultas e regras de negócio integradas ao banco de dados.' },
+        { name: 'JavaScript, HTML e CSS', detail: 'Interfaces web e interações nas aplicações.' },
       ],
     },
     {
-      title: 'Banco de Dados',
-      description: 'Modelagem, queries e tuning.',
-      size: 'medium',
+      title: 'Dados e integrações',
+      description: 'Da estrutura dos dados à informação para decisão.',
       skills: [
-        { name: 'Oracle Database', level: 85 },
-        { name: 'Modelagem de Dados', level: 80 },
-        { name: 'Performance Tuning', level: 70 },
+        { name: 'Oracle Database', detail: 'Desenvolvimento e otimização de banco de dados.' },
+        { name: 'Modelagem de dados', detail: 'Estruturação de dados a partir dos requisitos do sistema.' },
+        { name: 'APIs e sistemas externos', detail: 'Integração de aplicações e serviços.' },
       ],
     },
     {
-      title: 'Ferramentas & Métodos',
-      description: 'Versionamento, ágil e análise.',
-      size: 'medium',
+      title: 'Evolução de sistemas',
+      description: 'Manutenção e melhoria contínua das aplicações.',
       skills: [
-        { name: 'Git/GitHub', level: 75 },
-        { name: 'Metodologias Ágeis', level: 80 },
-        { name: 'Análise de Requisitos', level: 85 },
+        { name: 'Suporte técnico', detail: 'Investigação e correção de bugs em sistemas Oracle APEX.' },
+        { name: 'Performance', detail: 'Análise e otimização de consultas e aplicações.' },
+        { name: 'Requisitos e versionamento', detail: 'Análise de necessidades, Git/GitHub e metodologias ágeis.' },
       ],
     },
   ]
 
   return (
-    <section id="skills" className="py-24 lg:py-32 bg-bg-primary relative">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Cabeçalho editorial */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16 lg:mb-24">
-          <div
-            className="lg:col-span-4"
-          >
-          </div>
-
-          <h2
-            className="lg:col-span-8 lg:col-start-3 section-title text-center"
-          >
-            Habilidades{' '}
-            <span className="italic text-primary">técnicas.</span>
-          </h2>
+    <section id="skills" className="relative bg-bg-primary py-24 lg:py-32" aria-labelledby="skills-title">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-16 max-w-2xl text-center">
+          <h2 id="skills-title" className="section-title">Conhecimento na <span className="italic text-primary">prática.</span></h2>
+          <p className="mt-6 leading-relaxed text-text-secondary">Tecnologias e competências aplicadas ao desenvolvimento, à manutenção e à evolução de sistemas empresariais.</p>
         </div>
-
-        {/* Grid simétrico — 3 cards com mesmo tamanho */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-          {skillCategories.map((category, categoryIndex) => (
-            <div
-              key={categoryIndex}
-              className="card-dark p-8 hover:border-primary/40 transition-colors duration-300"
-            >
-              {/* Cabeçalho do card */}
-              <div className="mb-8">
-                <h3 className="font-display text-2xl text-text-primary mb-1">
-                  {category.title}
-                </h3>
-                <p className="text-text-secondary text-sm">{category.description}</p>
-              </div>
-
-              <div className="space-y-6">
-                {category.skills.map((skill, skillIndex) => (
-                  <div key={skillIndex}>
-                    <div className="flex justify-between items-baseline mb-2">
-                      <span className="text-text-primary font-medium">
-                        {skill.name}
-                      </span>
-                      <span className="font-mono text-xs text-primary">
-                        {skill.level}%
-                      </span>
-                    </div>
-
-                    <div className="w-full bg-bg-primary rounded-full h-1 overflow-hidden">
-                      <div
-                        className="bg-primary h-full rounded-full"
-                        style={{ width: `${skill.level}%` }}
-                      />
-                    </div>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8">
+          {categories.map((category) => (
+            <div key={category.title} className="card-dark p-6 sm:p-8">
+              <h3 className="mb-2 font-display text-2xl">{category.title}</h3>
+              <p className="mb-8 text-sm leading-relaxed text-text-secondary">{category.description}</p>
+              <dl className="space-y-6">
+                {category.skills.map((skill) => (
+                  <div key={skill.name}>
+                    <dt className="mb-1 font-medium text-primary">{skill.name}</dt>
+                    <dd className="text-sm leading-relaxed text-text-secondary">{skill.detail}</dd>
                   </div>
                 ))}
-              </div>
+              </dl>
             </div>
           ))}
         </div>
