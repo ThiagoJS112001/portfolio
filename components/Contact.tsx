@@ -18,7 +18,7 @@ export default function Contact() {
         </svg>
       ),
       title: 'Localização',
-      value: 'Timbó - SC',
+      value: 'Itajaí - SC',
       href: null,
     },
   ]
